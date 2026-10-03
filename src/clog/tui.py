@@ -57,11 +57,11 @@ def show(args):
 
     # daily section
     daily = st.grp_period("day")
-    total_day = st.total_wh(daily[-1]).total_seconds() / 3600
+    total_day = round(st.total_wh(daily[-1]).total_seconds() / 3600, 1)
     day_by_category = st.categorize(daily[-1])
 
     if len(daily) > 1:
-        total_yesterday = st.total_wh(daily[-2]).total_seconds() / 3600
+        total_yesterday = round(st.total_wh(daily[-2]).total_seconds() / 3600, 1)
     else:
         total_yesterday = 0
 
@@ -75,7 +75,7 @@ def show(args):
     layout["today"].update(
         Panel(
             Group(
-                Text(f"Total: {str(round(total_day, 1))} h  (Yesterday: {round(total_yesterday, 1)} h)",
+                Text(f"Total: {total_day} h  (Yesterday: {total_yesterday} h)",
                      style="bold bright_white"),
                 Text(""),
                 grid
@@ -88,7 +88,7 @@ def show(args):
     # weekly section
     weekly = st.grp_period("week")
     thisweek = weekly[-1]
-    total_wek = round(st.total_wh(thisweek).total_seconds() / 3600, 1) 
+    total_wek = round(st.total_wh(thisweek).total_seconds() / 3600, 1)
     wek_by_category = st.categorize(thisweek)
 
     if len(weekly) > 1:

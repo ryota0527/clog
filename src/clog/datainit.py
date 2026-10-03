@@ -13,3 +13,5 @@ def init(args):
 
     with open(LOG, "w", encoding="utf-8") as h:
         json.dump([], h, indent=4)
+
+    print("initialized")

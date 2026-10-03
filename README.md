@@ -18,6 +18,11 @@ $ pip install .
 ```
 
 ## Usage
+Initialize:
+```sh
+$ clog init
+```
+
 Register some categories of your work, e.g.
 ```sh
 $ clog add reading
@@ -27,7 +32,7 @@ $ clog add meeting
 
 Make sure to start tracking when you start working:
 ```sh
-$ clog start (category)
+$ clog start <category>
 ```
 
 When you finished, stop tracking:
