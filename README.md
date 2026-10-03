@@ -1,7 +1,8 @@
 # clog
 CLI working time tracker.<br>
-Expose your efforts, and laziness.<br>
-Statictics doesn't lie.
+Visualize your effort.<br>
+Expose your laziness.<br>
+Statistics never lie.
 
 ## Dependencies
 - Python >= 3.10
@@ -24,12 +25,12 @@ $ clog add research
 $ clog add meeting
 ```
 
-Set log when you start working by running
+Make sure to start tracking when you start working:
 ```sh
 $ clog start (category)
 ```
 
-When you finished, run:
+When you finished, stop tracking:
 ```sh
 $ clog stop
 ```
