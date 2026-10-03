@@ -50,7 +50,6 @@ To check the statistics of your working time, run:
 $ clog show
 ```
 Example:<br>
-figs/clog_demo.png
-    <img src="figs/clog_demo.png" width=50"
+![clog_demo](figs/clog_demo.png)
 
 Note: Dashboard may not be displayed correctly in the small window. width > 100 is recommended.
