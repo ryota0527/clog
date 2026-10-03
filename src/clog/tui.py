@@ -45,6 +45,7 @@ def ctgr_table(log_by_category, total_wh):
                 r_other += j["r"]
 
             table_c.add_row("Others", Text(f"{round(wh_other, 1)} h ({round(r_other, 1)}%)", style="green"))
+            break
 
         else:
             table_c.add_row(wh["ctgr"], Text(f"{round(wh["wh"], 1)} h ({round(wh["r"], 1)}%)", style="green"))
