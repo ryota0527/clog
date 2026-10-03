@@ -35,6 +35,11 @@ $ clog add research
 $ clog add meeting
 ```
 
+To see the categories you registered, run:
+```sh
+$ clog list
+```
+
 Make sure to start tracking when you start working:
 ```sh
 $ clog start <category>
