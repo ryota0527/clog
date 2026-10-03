@@ -16,7 +16,7 @@ def show_bar(hr, max_hr):
 
 
 def show(args):
-    console = Console(width=100, height=40)
+    console = Console(width=90, height=40)
 
     layout = Layout()
 
@@ -32,7 +32,7 @@ def show(args):
 
     layout["day&week"].split_column(
             Layout(name="today", ratio=1),
-            Layout(name="week", ratio=4)
+            Layout(name="week", ratio=3)
     )
 
     layout["month&year"].split_column(
