@@ -1,9 +1,10 @@
 import json
 from datetime import datetime
-from system import CATEGORY, START_LOG, LOG
+from clog.system import CATEGORY, START_LOG, LOG
 
 
-def start(arg):
+def start(args):
+    arg = args.category
     with open(START_LOG, "r", encoding="utf-8") as f:
         start_log = json.load(f)
 
@@ -27,7 +28,7 @@ def start(arg):
         json.dump(data, h, ensure_ascii=False, indent=4)
 
 
-def fin():
+def fin(args):
     timestamp = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
 
     with open(START_LOG, "r", encoding="utf-8") as f:
@@ -55,14 +56,24 @@ def fin():
         json.dump([], i, ensure_ascii=False, indent=4)
 
 
-def add_category(arg):
+def add_category(args):
+    arg = args.category
     with open(CATEGORY, "r", encoding="utf-8") as f:
         ctgr = json.load(f)
 
     if arg in ctgr:
         raise ValueError(f"error: category {arg} already exists.")
 
-    ctgr.append(arg)
+    ctgr.append(str(arg))
 
     with open(CATEGORY, "w", encoding="utf-8") as g:
         json.dump(ctgr, g, ensure_ascii=False, indent=4)
+
+
+def list_ctgr(args):
+    with open(CATEGORY, "r", encoding="utf-8") as f:
+        ctgr = json.load(f)
+
+    print("categories:")
+    for c in ctgr:
+        print(f"- {c}")

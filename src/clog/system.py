@@ -1,6 +1,6 @@
 from pathlib import Path
 
-DATA_DIR = Path.Home() / ".clog"
+DATA_DIR = Path.home() / ".clog"
 
 CATEGORY = DATA_DIR / "categories.json"
 START_LOG = DATA_DIR / "start.json"

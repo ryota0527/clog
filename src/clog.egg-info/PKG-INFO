@@ -1,0 +1,7 @@
+Metadata-Version: 2.4
+Name: clog
+Version: 1.0
+Summary: simple CLI work tracker
+Requires-Python: >=3.10
+Description-Content-Type: text/markdown
+Requires-Dist: rich

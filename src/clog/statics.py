@@ -1,7 +1,7 @@
 import json
 from datetime import datetime, timedelta
 from collections import defaultdict
-from system import LOG
+from clog.system import LOG
 
 
 def load_log():
@@ -33,9 +33,11 @@ def categorize(log_grp):
     return categorized_wh
 
 
-def grp_period(period):
+def grp_period(period, logs=None):
     # period = day, week, month, year
-    logs = load_log()
+    if logs is None:
+        logs = load_log()
+
     sum = []
 
     idx = 0
