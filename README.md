@@ -49,3 +49,7 @@ To check the statistics of your working time, run:
 ```sh
 $ clog show
 ```
+Example:
+![clog_demo](figs/clog_demo.png)
+
+Note: Dashboard may not be displayed correctly in the small window. width > 100 is recommended.
