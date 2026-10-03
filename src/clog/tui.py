@@ -70,7 +70,7 @@ def show(args):
         Panel(
             Group(
                 Text(f"Total: {str(round(total_day, 1))} h",
-                     style="bold bright green"),
+                     style="bold bright_white"),
                 Text(""),
                 grid
             ),
@@ -133,7 +133,7 @@ def show(args):
         Panel(
             Group(
                 Text(f"Total : {total_wek} h",
-                     style="bold bright green"),
+                     style="bold bright_white"),
                 Text(""),
                 table_wek,
                 Text(""),
@@ -162,7 +162,7 @@ def show(args):
         Panel(
             Group(
                 Text(f"Total: {total_mon} h",
-                     style="bold bright green"),
+                     style="bold bright_white"),
                 Text(""),
                 table_mon_c
             ),
@@ -187,7 +187,7 @@ def show(args):
         Panel(
             Group(
                 Text(f"Total: {total_y} h",
-                     style="bold bright green"),
+                     style="bold bright_white"),
                 Text(""),
                 table_y_c
             ),
