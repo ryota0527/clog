@@ -79,3 +79,13 @@ def total_wh(log_grp):
         total += log["working_hr"]
 
     return total
+
+
+def ave_wh_perday(log_grp):
+    daily = grp_period("day", logs=log_grp)
+    total_perday = [
+            total_wh(logs) for logs in daily
+    ]
+    av = sum(total_perday, start=timedelta()) / len(total_perday)
+
+    return round(av.total_seconds() / 3600, 1)
