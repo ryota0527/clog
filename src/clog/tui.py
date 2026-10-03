@@ -15,6 +15,43 @@ def show_bar(hr, max_hr):
     return Text("■" * n, style="green")
 
 
+def ctgr_table(log_by_category, total_wh):
+    table_c = Table(
+        show_header=False
+    )
+
+    whs = []
+    for key, val in log_by_category.items():
+        hours = val.total_seconds() / 3600
+        r = hours / total_wh * 100
+        whs.append({
+                   "wh": hours,
+                   "r": r,
+                   "ctgr": key
+        })
+
+    whs_sorted = sorted(
+            whs,
+            key=lambda x: x["wh"],
+            reverse=True
+    )
+
+    for i, wh in enumerate(whs_sorted):
+        if i == 5:
+            wh_other = 0
+            r_other = 0
+            for j in whs_sorted[i:]:
+                wh_other += j["wh"]
+                r_other += j["r"]
+
+            table_c.add_row("Others", Text(f"{round(wh_other, 1)} h ({round(r_other, 1)}%)", style="green"))
+
+        else:
+            table_c.add_row(wh["ctgr"], Text(f"{round(wh["wh"], 1)} h ({round(wh["r"], 1)}%)", style="green"))
+
+    return table_c
+
+
 def show(args):
     console = Console(width=90, height=40)
 
@@ -31,8 +68,8 @@ def show(args):
     )
 
     layout["day&week"].split_column(
-            Layout(name="today", ratio=1),
-            Layout(name="week", ratio=3)
+            Layout(name="today", ratio=3),
+            Layout(name="week", ratio=5)
     )
 
     layout["month&year"].split_column(
@@ -69,22 +106,18 @@ def show(args):
     else:
         total_yesterday = 0
 
-    grid = Table.grid()
-
-    for key, val in day_by_category.items():
-        hours = val.total_seconds() / 3600
-        r = round(hours / total_day * 100, 1)
-        grid.add_row(key, Text(f" {round(hours, 1)} h ({r}%)", style="green"))
+    table_c_day = ctgr_table(day_by_category, total_day)
 
     layout["today"].update(
         Panel(
             Group(
+                Text(""),
                 Text(f"Total: {round(total_day, 1)} h  (Yesterday: {round(total_yesterday, 1)} h)",
                      style="bold bright_white"),
                 Text(""),
-                grid
+                table_c_day
             ),
-            title=f"Daily Report ({datetime.today().strftime("%Y-%m-%d")})",
+            title=Text(f"Daily Report ({datetime.today().strftime("%Y-%m-%d")})", style="bold white"),
             border_style="bright_black"
         )
     )
@@ -136,26 +169,20 @@ def show(args):
                 "0"
         )
 
-    table_wek_c = Table(
-        show_header=False
-    )
-
-    for key, val in wek_by_category.items():
-        hours = val.total_seconds() / 3600
-        r = round(hours / total_wek * 100, 1)
-        table_wek_c.add_row(key, Text(f"{round(hours, 1)} h ({r}%)", style="green"))
+    table_c_wek = ctgr_table(wek_by_category, total_wek)
 
     layout["week"].update(
         Panel(
             Group(
+                Text(""),
                 Text(f"Total : {round(total_wek, 1)} h  (Last week: {round(total_lastwek, 1)} h)",
                      style="bold bright_white"),
                 Text(""),
                 table_wek,
                 Text(""),
-                table_wek_c
+                table_c_wek
             ),
-            title="Weekly Reports",
+            title=Text("Weekly Reports", style="bold white"),
             border_style="bright_black"
         )
     )
@@ -172,26 +199,20 @@ def show(args):
     else:
         total_lastmon = 0
 
-    table_mon_c = Table(
-        show_header=False
-    )
-
-    for key, val in mon_by_category.items():
-        hours = val.total_seconds() / 3600
-        r = round(hours / total_mon * 100, 1)
-        table_mon_c.add_row(key, Text(f"{round(hours, 1)} h ({r}%)", style="green"))
+    table_c_mon = ctgr_table(mon_by_category, total_mon)
 
     layout["month"].update(
         Panel(
             Group(
+                Text(""),
                 Text(f"Total: {round(total_mon, 1)} h  (Last month: {round(total_lastmon, 1)} h)",
                      style="bold bright_white"),
                 Text(""),
-                table_mon_c,
+                table_c_mon,
                 Text(""),
                 Text(f"Average per day: {av_perday} h", style="bold bright_white")
             ),
-            title=f"Monthly Reports ({thismonth[0]["start"].strftime("%B")})",
+            title=Text(f"Monthly Reports ({thismonth[0]["start"].strftime("%B")})", style="bold white"),
             border_style="bright_black"
         )
     )
@@ -208,24 +229,20 @@ def show(args):
     else:
         total_ly = 0
 
-    table_y_c = Table(show_header=False)
-
-    for key, val in y_by_category.items():
-        hours = val.total_seconds() / 3600
-        r = round(hours / total_y * 100, 1)
-        table_y_c.add_row(key, Text(f"{round(hours, 1)} h ({r}%)", style="green"))
+    table_c_y = ctgr_table(y_by_category, total_y)
 
     layout["year"].update(
         Panel(
             Group(
+                Text(""),
                 Text(f"Total: {round(total_y, 1)} h  (Last year: {round(total_ly, 1)} h)",
                      style="bold bright_white"),
                 Text(""),
-                table_y_c,
+                table_c_y,
                 Text(""),
                 Text(f"Average per day: {av_perday} h", style="bold bright_white")
             ),
-            title=f"Yearly Reports ({thisyear[0]["start"].strftime("%Y")})",
+            title=Text(f"Yearly Reports ({thisyear[0]["start"].strftime("%Y")})", style="bold white"),
             border_style="bright_black"
         )
     )
