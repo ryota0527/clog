@@ -27,6 +27,8 @@ def start(args):
     with open(START_LOG, "w", encoding="utf-8") as h:
         json.dump(data, h, ensure_ascii=False, indent=4)
 
+    print("session started")
+
 
 def fin(args):
     timestamp = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
@@ -55,6 +57,8 @@ def fin(args):
     with open(START_LOG, "w", encoding="utf-8") as i:
         json.dump([], i, ensure_ascii=False, indent=4)
 
+    print("session ended")
+
 
 def add_category(args):
     arg = args.category
@@ -69,11 +73,13 @@ def add_category(args):
     with open(CATEGORY, "w", encoding="utf-8") as g:
         json.dump(ctgr, g, ensure_ascii=False, indent=4)
 
+    print(f"category {str(arg)} added")
+
 
 def list_ctgr(args):
     with open(CATEGORY, "r", encoding="utf-8") as f:
         ctgr = json.load(f)
 
-    print("categories:")
+    print("Registered categories:")
     for c in ctgr:
         print(f"- {c}")
