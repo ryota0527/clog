@@ -17,6 +17,11 @@ $ cd clog
 $ pip install .
 ```
 
+Uninstall:
+```sh
+$ pip uninstall clog
+```
+
 ## Usage
 Initialize:
 ```sh

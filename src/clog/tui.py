@@ -57,25 +57,25 @@ def show(args):
 
     # daily section
     daily = st.grp_period("day")
-    total_day = round(st.total_wh(daily[-1]).total_seconds() / 3600, 1)
+    total_day = st.total_wh(daily[-1]).total_seconds() / 3600
     day_by_category = st.categorize(daily[-1])
 
     if len(daily) > 1:
-        total_yesterday = round(st.total_wh(daily[-2]).total_seconds() / 3600, 1)
+        total_yesterday = st.total_wh(daily[-2]).total_seconds() / 3600
     else:
         total_yesterday = 0
 
     grid = Table.grid()
 
     for key, val in day_by_category.items():
-        hours = round(val.total_seconds() / 3600, 1)
+        hours = val.total_seconds() / 3600
         r = round(hours / total_day * 100, 1)
-        grid.add_row(key, Text(f" {hours} h ({r}%)", style="green"))
+        grid.add_row(key, Text(f" {round(hours, 1)} h ({r}%)", style="green"))
 
     layout["today"].update(
         Panel(
             Group(
-                Text(f"Total: {total_day} h  (Yesterday: {total_yesterday} h)",
+                Text(f"Total: {round(total_day, 1)} h  (Yesterday: {round(total_yesterday, 1)} h)",
                      style="bold bright_white"),
                 Text(""),
                 grid
@@ -88,11 +88,11 @@ def show(args):
     # weekly section
     weekly = st.grp_period("week")
     thisweek = weekly[-1]
-    total_wek = round(st.total_wh(thisweek).total_seconds() / 3600, 1)
+    total_wek = st.total_wh(thisweek).total_seconds() / 3600
     wek_by_category = st.categorize(thisweek)
 
     if len(weekly) > 1:
-        total_lastwek = round(st.total_wh(weekly[-2]).total_seconds() / 3600, 1)
+        total_lastwek = st.total_wh(weekly[-2]).total_seconds() / 3600
     else:
         total_lastwek = 0
 
@@ -137,14 +137,14 @@ def show(args):
     )
 
     for key, val in wek_by_category.items():
-        hours = round(val.total_seconds() / 3600, 1)
+        hours = val.total_seconds() / 3600
         r = round(hours / total_wek * 100, 1)
-        table_wek_c.add_row(key, Text(f"{hours} h ({r}%)", style="green"))
+        table_wek_c.add_row(key, Text(f"{round(hours, 1)} h ({r}%)", style="green"))
 
     layout["week"].update(
         Panel(
             Group(
-                Text(f"Total : {total_wek} h  (Last week: {total_lastwek} h)",
+                Text(f"Total : {round(total_wek, 1)} h  (Last week: {round(total_lastwek, 1)} h)",
                      style="bold bright_white"),
                 Text(""),
                 table_wek,
@@ -159,12 +159,12 @@ def show(args):
     # monthly section
     monthly = st.grp_period("month")
     thismonth = monthly[-1]
-    total_mon = round(st.total_wh(thismonth).total_seconds() / 3600, 1)
+    total_mon = st.total_wh(thismonth).total_seconds() / 3600
     mon_by_category = st.categorize(thismonth)
     av_perday = st.ave_wh_perday(thismonth)
 
     if len(monthly) > 1:
-        total_lastmon = round(st.total_wh(monthly[-2]).total_seconds() / 3600, 1)
+        total_lastmon = st.total_wh(monthly[-2]).total_seconds() / 3600
     else:
         total_lastmon = 0
 
@@ -173,14 +173,14 @@ def show(args):
     )
 
     for key, val in mon_by_category.items():
-        hours = round(val.total_seconds() / 3600, 1)
+        hours = val.total_seconds() / 3600
         r = round(hours / total_mon * 100, 1)
-        table_mon_c.add_row(key, Text(f"{hours} h ({r}%)", style="green"))
+        table_mon_c.add_row(key, Text(f"{round(hours, 1)} h ({r}%)", style="green"))
 
     layout["month"].update(
         Panel(
             Group(
-                Text(f"Total: {total_mon} h  (Last month: {total_lastmon} h)",
+                Text(f"Total: {round(total_mon, 1)} h  (Last month: {round(total_lastmon, 1)} h)",
                      style="bold bright_white"),
                 Text(""),
                 table_mon_c,
@@ -195,26 +195,26 @@ def show(args):
     # yearly section
     yearly = st.grp_period("year")
     thisyear = yearly[-1]
-    total_y = round(st.total_wh(thisyear).total_seconds() / 3600, 1)
+    total_y = st.total_wh(thisyear).total_seconds() / 3600
     y_by_category = st.categorize(thisyear)
     av_perday = st.ave_wh_perday(thisyear)
 
     if len(yearly) > 1:
-        total_ly = round(st.total_wh(yearly[-2]).total_seconds() / 3600, 1)
+        total_ly = st.total_wh(yearly[-2]).total_seconds() / 3600
     else:
         total_ly = 0
 
     table_y_c = Table(show_header=False)
 
     for key, val in y_by_category.items():
-        hours = round(val.total_seconds() / 3600, 1)
+        hours = val.total_seconds() / 3600
         r = round(hours / total_y * 100, 1)
-        table_y_c.add_row(key, Text(f"{hours} h ({r}%)", style="green"))
+        table_y_c.add_row(key, Text(f"{round(hours, 1)} h ({r}%)", style="green"))
 
     layout["year"].update(
         Panel(
             Group(
-                Text(f"Total: {total_y} h  (Last year: {total_ly} h)",
+                Text(f"Total: {round(total_y, 1)} h  (Last year: {round(total_ly, 1)} h)",
                      style="bold bright_white"),
                 Text(""),
                 table_y_c,
