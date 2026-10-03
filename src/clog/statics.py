@@ -38,6 +38,9 @@ def grp_period(period, logs=None):
     if logs is None:
         logs = load_log()
 
+    if logs == []:
+        raise ValueError("log is empty")
+
     sum = []
 
     idx = 0

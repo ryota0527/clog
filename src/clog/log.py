@@ -17,7 +17,7 @@ def start(args):
         ctgr = json.load(g)
 
     if arg not in ctgr:
-        raise ValueError("error: category not found.")
+        raise ValueError("category not found.")
 
     data = {
                 "datetime": timestamp,
@@ -66,7 +66,7 @@ def add_category(args):
         ctgr = json.load(f)
 
     if arg in ctgr:
-        raise ValueError(f"error: category {arg} already exists.")
+        raise ValueError(f"category {arg} already exists.")
 
     ctgr.append(str(arg))
 
