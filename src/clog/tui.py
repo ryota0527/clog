@@ -57,6 +57,10 @@ def show(args):
 
     # daily section
     daily = st.grp_period("day")
+    if daily == []:
+        print("error: no work recorded")
+        return
+
     total_day = st.total_wh(daily[-1]).total_seconds() / 3600
     day_by_category = st.categorize(daily[-1])
 
