@@ -1,6 +1,7 @@
 import argparse
 import clog.log as log
 import clog.tui as tui
+from clog.statics import fill_blanc
 import clog.datainit as init
 
 
@@ -60,4 +61,5 @@ def main():
 
     args = parser.parse_args()
 
+    fill_blanc()
     args.func(args)

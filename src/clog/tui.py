@@ -101,6 +101,7 @@ def show(args):
     daily = st.grp_period("day")
     if daily == []:
         total_day = 0
+        total_yesterday = 0
     else:
         total_day = st.total_wh(daily[-1]).total_seconds() / 3600
         day_by_category = st.categorize(daily[-1])
@@ -133,13 +134,10 @@ def show(args):
     weekly = st.grp_period("week")
     if weekly == []:
         total_wek = 0
+        total_lastwek = 0
     else:
-        thisweek = weekly[-1]
-        if thisweek == []:
-            total_wek = 0
-        else:
-            total_wek = st.total_wh(thisweek).total_seconds() / 3600
-            wek_by_category = st.categorize(thisweek)
+        total_wek = st.total_wh(weekly[-1]).total_seconds() / 3600
+        wek_by_category = st.categorize(weekly[-1])
 
     if len(weekly) > 1:
         total_lastwek = st.total_wh(weekly[-2]).total_seconds() / 3600
@@ -156,7 +154,7 @@ def show(args):
         table_wek.add_column("hr")
 
         weekday_list = ["Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"]
-        perday = st.grp_period("day", thisweek)
+        perday = st.grp_period("day", weekly[-1])
         daily_total = [st.total_wh(logs) for logs in perday]
         max_hr = max(daily_total, default=timedelta())
 
@@ -208,16 +206,12 @@ def show(args):
     monthly = st.grp_period("month")
     if monthly == []:
         total_mon = 0
+        total_lastmon = 0
         av_perday = 0
     else:
-        thismonth = monthly[-1]
-        if thismonth == []:
-            total_mon = 0
-            av_perday = 0
-        else:
-            total_mon = st.total_wh(thismonth).total_seconds() / 3600
-            mon_by_category = st.categorize(thismonth)
-            av_perday = st.ave_wh_perday(thismonth)
+        total_mon = st.total_wh(monthly[-1]).total_seconds() / 3600
+        mon_by_category = st.categorize(monthly[-1])
+        av_perday = st.ave_wh_perday(monthly[-1])
 
     if len(monthly) > 1:
         total_lastmon = st.total_wh(monthly[-2]).total_seconds() / 3600
@@ -249,16 +243,12 @@ def show(args):
     yearly = st.grp_period("year")
     if yearly == []:
         total_y = 0
+        total_ly = 0
         av_perday = 0
     else:
-        thisyear = yearly[-1]
-        if thisyear == []:
-            total_y = 0
-            av_perday = 0
-        else:
-            total_y = st.total_wh(thisyear).total_seconds() / 3600
-            y_by_category = st.categorize(thisyear)
-            av_perday = st.ave_wh_perday(thisyear)
+        total_y = st.total_wh(yearly[-1]).total_seconds() / 3600
+        y_by_category = st.categorize(yearly[-1])
+        av_perday = st.ave_wh_perday(yearly[-1])
 
     if len(yearly) > 1:
         total_ly = st.total_wh(yearly[-2]).total_seconds() / 3600

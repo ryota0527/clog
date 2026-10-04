@@ -28,6 +28,9 @@ def load_log():
 def categorize(log_grp):
     categorized_wh = defaultdict(lambda: timedelta())
     for log in log_grp:
+        if log["category"] is None:
+            continue
+
         categorized_wh[log["category"]] += log["working_hr"]
 
     return categorized_wh
@@ -77,6 +80,9 @@ def grp_period(period, logs=None):
 
 
 def total_wh(log_grp):
+    if log_grp == []:
+        return 0
+
     total = timedelta()
     for log in log_grp:
         total += log["working_hr"]
@@ -85,6 +91,9 @@ def total_wh(log_grp):
 
 
 def ave_wh_perday(log_grp):
+    if log_grp == []:
+        return 0
+
     daily = grp_period("day", logs=log_grp)
     total_perday = [
             total_wh(logs) for logs in daily
@@ -92,3 +101,28 @@ def ave_wh_perday(log_grp):
     av = sum(total_perday, start=timedelta()) / len(total_perday)
 
     return round(av.total_seconds() / 3600, 1)
+
+
+def fill_blanc():
+    with open(LOG, "r", encoding="utf-8") as f:
+        data = json.load(f)
+
+    if data == []:
+        return
+
+    log0 = data[-1]["start"].strptime("%Y-%m-%d %H:%M:%S").date()
+    log1 = datetime.today().date()
+    blanc = log1 - log0
+
+    if blanc > timedelta(day=1):
+        for i in range(1, blanc.days+1):
+            fill_date = data[-1]["start"].strptime("%Y-%m-%d %H:%M:%S") + timedelta(day=i)
+            blanc_log = {
+                    "start": fill_date,
+                    "finish": fill_date,
+                    "category": None
+            }
+            data.append(blanc_log)
+
+    with open(LOG, "w", encoding="utf-8") as g:
+        json.dump(data, g, ensure_ascii=False, indent=4)
