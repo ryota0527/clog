@@ -110,16 +110,16 @@ def fill_blanc():
     if data == []:
         return
 
-    log0 = data[-1]["start"].strptime("%Y-%m-%d %H:%M:%S").date()
+    log0 = datetime.strptime(data[-1]["start"], "%Y-%m-%d %H:%M:%S").date()
     log1 = datetime.today().date()
     blanc = log1 - log0
 
-    if blanc > timedelta(day=1):
+    if blanc >= timedelta(days=1):
         for i in range(1, blanc.days+1):
-            fill_date = data[-1]["start"].strptime("%Y-%m-%d %H:%M:%S") + timedelta(day=i)
+            fill_date = datetime.strptime(data[-1]["start"], "%Y-%m-%d %H:%M:%S") + timedelta(days=i)
             blanc_log = {
-                    "start": fill_date,
-                    "finish": fill_date,
+                    "start": fill_date.strftime("%Y-%m-%d %H:%M:%S"),
+                    "finish": fill_date.strftime("%Y-%m-%d %H:%M:%S"),
                     "category": None
             }
             data.append(blanc_log)
