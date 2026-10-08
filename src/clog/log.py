@@ -94,8 +94,8 @@ def add(args):
     wh = now - timedelta(hours=float(args.working_time))
 
     data = {
-                "start": wh.strftime("%Y-%m-%d %H:%M:%S"),
-                "finish": now.strftime("%Y-%m-%d %H:%M:%S"),
+                "start": now.strftime("%Y-%m-%d %H:%M:%S"),
+                "finish": wh.strftime("%Y-%m-%d %H:%M:%S"),
                 "category": str(args.category)
             }
 
