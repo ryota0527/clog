@@ -115,7 +115,7 @@ def fill_blanc():
     blanc = log1 - log0
 
     if blanc >= timedelta(days=1):
-        day = data[-1]["start"].split(" ")[0] + "00:00:00"
+        day = data[-1]["start"].split(" ")[0] + " 00:00:00"
         for i in range(1, blanc.days+1):
             fill_date = datetime.strptime(day, "%Y-%m-%d %H:%M:%S") + timedelta(days=i)
             blanc_log = {
