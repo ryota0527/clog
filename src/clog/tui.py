@@ -5,7 +5,7 @@ from rich.table import Table
 from rich.panel import Panel
 from rich.text import Text
 from datetime import datetime, timedelta
-import clog.statics as st
+import clog.statistics as st
 
 
 def show_bar(hr, max_hr):
@@ -16,7 +16,8 @@ def show_bar(hr, max_hr):
         return None
 
     n = int(hr / max_hr * 20)
-    return Text("■" * n, style="green")
+    # n = int(hr / 10 * 20)
+    return Text("■" * n + " " * (20 - n), style="green")
 
 
 def ctgr_table(log_by_category, total_wh):

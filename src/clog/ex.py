@@ -1,7 +1,7 @@
 import argparse
 import clog.log as log
 import clog.tui as tui
-from clog.statics import fill_blanc
+from clog.statistics import fill_blanc
 import clog.datainit as init
 
 
@@ -21,15 +21,15 @@ def main():
     )
     init_parser.set_defaults(func=init.init)
 
-    addctgr_parser = subparsers.add_parser(
-        "add",
-        help="add a category"
+    crectgr_parser = subparsers.add_parser(
+        "create",
+        help="create a category"
     )
-    addctgr_parser.add_argument(
+    crectgr_parser.add_argument(
         "category",
         help="category name"
     )
-    addctgr_parser.set_defaults(func=log.add_category)
+    crectgr_parser.set_defaults(func=log.add_category)
 
     list_parser = subparsers.add_parser(
             "list",
@@ -58,6 +58,20 @@ def main():
         help="show reports"
     )
     show_parser.set_defaults(func=tui.show)
+
+    add_parser = subparsers.add_parser(
+        "add",
+        help="add working time"
+    )
+    add_parser.add_argument(
+        "category",
+        help="category name"
+    )
+    add_parser.add_argument(
+        "working_time",
+        help="working time [hr]"
+    )
+    add_parser.set_defaults(func=log.add)
 
     args = parser.parse_args()
 

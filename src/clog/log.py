@@ -1,5 +1,5 @@
 import json
-from datetime import datetime
+from datetime import datetime, timedelta
 from clog.system import CATEGORY, START_LOG, LOG
 
 
@@ -83,3 +83,24 @@ def list_ctgr(args):
     print("Registered categories:")
     for c in ctgr:
         print(f"- {c}")
+
+
+def add(args):
+    now = datetime.now()
+    wh = now + timedelta(hours=round(float(args.working_time), 2))
+
+    data = {
+                "start": now.strftime("%Y-%m-%d %H:%M:%S"),
+                "finish": wh.strftime("%Y-%m-%d %H:%M:%S"),
+                "category": str(args.category)
+            }
+
+    with open(LOG, "r", encoding="utf-8") as g:
+        datalist = json.load(g)
+
+    datalist.append(data)
+
+    with open(LOG, "w", encoding="utf-8") as h:
+        json.dump(datalist, h, ensure_ascii=False, indent=4)
+
+    print("working time added")

@@ -30,9 +30,9 @@ $ clog init
 
 Register some categories of your work, e.g.
 ```sh
-$ clog add reading
-$ clog add research
-$ clog add meeting
+$ clog create reading
+$ clog create research
+$ clog create meeting
 ```
 
 To see the categories you registered, run:
@@ -49,6 +49,12 @@ When you finished, stop tracking:
 ```sh
 $ clog stop
 ```
+
+If you forgot to start tracking, you are still able to add working time manually:
+```sh
+$ clog add <category> <working time>
+```
+(working time argument must be integer or float. float will be rounded to one decimal place.)
 
 To check the statistics of your working time, run:
 ```sh
