@@ -54,7 +54,7 @@ If you forgot to start tracking, you are still able to add working time manually
 ```sh
 $ clog add <category> <working time>
 ```
-(working time argument must be integer or float. float will be rounded to one decimal place.)
+(working time argument must be integer or float.)
 
 To check the statistics of your working time, run:
 ```sh

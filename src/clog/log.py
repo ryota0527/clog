@@ -86,12 +86,16 @@ def list_ctgr(args):
 
 
 def add(args):
+    if float(args.working_time) <= 0:
+        print("error: working time must be positive.")
+        return
+
     now = datetime.now()
-    wh = now + timedelta(hours=round(float(args.working_time), 2))
+    wh = now - timedelta(hours=float(args.working_time))
 
     data = {
-                "start": now.strftime("%Y-%m-%d %H:%M:%S"),
-                "finish": wh.strftime("%Y-%m-%d %H:%M:%S"),
+                "start": wh.strftime("%Y-%m-%d %H:%M:%S"),
+                "finish": now.strftime("%Y-%m-%d %H:%M:%S"),
                 "category": str(args.category)
             }
 
