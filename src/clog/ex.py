@@ -53,6 +53,12 @@ def main():
     )
     stop_parser.set_defaults(func=log.fin)
 
+    cease_parser = subparsers.add_parser(
+        "cease",
+        help="cease current session"
+    )
+    cease_parser.set_defaults(func=log.cease)
+
     show_parser = subparsers.add_parser(
         "show",
         help="show reports"

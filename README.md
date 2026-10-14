@@ -56,6 +56,11 @@ $ clog add <category> <working time>
 ```
 (working time argument must be integer or float.)
 
+If you want to stop tracking without recording, run:
+```sh
+$ clog cease
+```
+
 To check the statistics of your working time, run:
 ```sh
 $ clog show

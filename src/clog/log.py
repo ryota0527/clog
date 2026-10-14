@@ -30,6 +30,20 @@ def start(args):
     print("session started")
 
 
+def cease(args):
+    with open(START_LOG, "r", encoding="utf-8") as f:
+        start_log = json.load(f)
+
+    if len(start_log) == 0:
+        print("error: start timestamp does not exist.")
+        return
+
+    with open(START_LOG, "w", encoding="utf-8") as i:
+        json.dump([], i, ensure_ascii=False, indent=4)
+
+    print("session ceased")
+
+
 def fin(args):
     timestamp = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
 
