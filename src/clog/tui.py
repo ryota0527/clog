@@ -15,8 +15,8 @@ def show_bar(hr, max_hr):
     if max_hr == 0:
         return None
 
-    n = int(hr / max_hr * 20)
-    # n = int(hr / 10 * 20)
+    # n = int(hr / max_hr * 20)
+    n = int(hr / 10 * 20)
     return Text("■" * n + " " * (20 - n), style="green")
 
 
